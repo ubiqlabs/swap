@@ -1,6 +1,7 @@
 interface Window {
   ethereum?: {
-    isMetaMask?: true
+    isMetaMask?: false
+    isSparrow?: true
     on?: (...args: any[]) => void
     removeListener?: (...args: any[]) => void
   }

@@ -1,14 +1,19 @@
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { ChainId, JSBI, Percent, Token, WETH } from '@uniswap/sdk'
 
-import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
+// import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
+import { injected } from '../connectors'
 
-export const ROUTER_ADDRESS = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+export const ROUTER_ADDRESS = '0xf3ce4655a44146c8eefbf45651f6479f9d67a77a'
 
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
+
+export const ESCH = new Token(ChainId.UBIQ, '0xcf3222b7FDa7a7563b9E1E6C966Bead04AC23c36', 18, 'ESCH', 'Escher')
+export const GEO = new Token(ChainId.UBIQ, '0x500684CE0D4f04aBeDff3e54fCF8acC5E6CFc4bD', 8, 'GEO', 'GeoCoin')
+export const SPHR = new Token(ChainId.UBIQ, '0x20e3dD746DdF519B23Ffbbb6Da7a5d33eA6349D6', 8, 'SPHR', 'Sphere')
 
 export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
@@ -22,13 +27,15 @@ const WETH_ONLY: ChainTokenList = {
   [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
   [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
-  [ChainId.KOVAN]: [WETH[ChainId.KOVAN]]
+  [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
+  [ChainId.UBIQ]: [WETH[ChainId.UBIQ]]
 }
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR],
+  [ChainId.UBIQ]: [...WETH_ONLY[ChainId.UBIQ], ESCH]
 }
 
 /**
@@ -44,13 +51,15 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
+  [ChainId.UBIQ]: [...WETH_ONLY[ChainId.UBIQ], ESCH, GEO, SPHR]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
+  [ChainId.UBIQ]: [...WETH_ONLY[ChainId.UBIQ], ESCH, GEO, SPHR]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -86,14 +95,23 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#010101',
     primary: true
   },
+  SPARROW: {
+    connector: injected,
+    name: 'Sparrow',
+    iconName: 'sparrow.png',
+    description: 'Easy-to-use ubiq browser extension.',
+    href: null,
+    color: '#00ea90'
+  },
   METAMASK: {
     connector: injected,
     name: 'MetaMask',
     iconName: 'metamask.png',
-    description: 'Easy-to-use browser extension.',
+    description: 'Easy-to-use ethereum browser extension.',
     href: null,
     color: '#E8831D'
-  },
+  }
+  /*
   WALLET_CONNECT: {
     connector: walletconnect,
     name: 'WalletConnect',
@@ -138,6 +156,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4A6C9B',
     mobile: true
   }
+  */
 }
 
 export const NetworkContextName = 'NETWORK'
@@ -164,4 +183,4 @@ export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16))
 export const BETTER_TRADE_LINK_THRESHOLD = new Percent(JSBI.BigInt(75), JSBI.BigInt(10000))
 
 // the Uniswap Default token list lives here
-export const DEFAULT_TOKEN_LIST_URL = 'https://unpkg.com/@uniswap/default-token-list@latest'
+export const DEFAULT_TOKEN_LIST_URL = 'https://raw.githubusercontent.com/octanolabs/default-token-list/master/uniswap-default.tokenlist.json'

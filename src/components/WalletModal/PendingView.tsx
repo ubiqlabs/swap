@@ -75,6 +75,7 @@ export default function PendingView({
   tryActivation: (connector: AbstractConnector) => void
 }) {
   const isMetamask = window?.ethereum?.isMetaMask
+  const isSparrow = window?.ethereum?.isSparrow
 
   return (
     <PendingSection>
@@ -108,6 +109,12 @@ export default function PendingView({
               return null
             }
             if (!isMetamask && option.name === 'MetaMask') {
+              return null
+            }
+            if (isSparrow && option.name !== 'Sparrow') {
+              return null
+            }
+            if (!isSparrow && option.name === 'Sparrow') {
               return null
             }
           }

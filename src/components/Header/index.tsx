@@ -19,7 +19,6 @@ import Menu from '../Menu'
 
 import Row, { RowBetween } from '../Row'
 import Web3Status from '../Web3Status'
-import VersionSwitch from './VersionSwitch'
 
 const HeaderFrame = styled.div`
   display: flex;
@@ -63,6 +62,9 @@ const Title = styled.a`
 
 const TitleText = styled(Row)`
   width: fit-content;
+  img {
+    height: 70px;
+  }
   white-space: nowrap;
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     display: none;
@@ -102,8 +104,11 @@ const UniIcon = styled.div`
   :hover {
     transform: rotate(-5deg);
   }
+  img {
+    height: 70px;
+  }
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    img { 
+    img {
       width: 4.5rem;
     }
   `};
@@ -127,11 +132,12 @@ const BalanceText = styled(Text)`
 `
 
 const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
-  [ChainId.MAINNET]: null,
+  [ChainId.MAINNET]: 'Ethereum',
   [ChainId.RINKEBY]: 'Rinkeby',
   [ChainId.ROPSTEN]: 'Ropsten',
   [ChainId.GÖRLI]: 'Görli',
-  [ChainId.KOVAN]: 'Kovan'
+  [ChainId.KOVAN]: 'Kovan',
+  [ChainId.UBIQ]: null // TODO - xocel
 }
 
 export default function Header() {
@@ -161,14 +167,13 @@ export default function Header() {
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
               {account && userEthBalance ? (
                 <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                  {userEthBalance?.toSignificant(4)} ETH
+                  {userEthBalance?.toSignificant(4)} UBQ
                 </BalanceText>
               ) : null}
               <Web3Status />
             </AccountElement>
           </HeaderElement>
           <HeaderElementWrap>
-            <VersionSwitch />
             <Settings />
             <Menu />
           </HeaderElementWrap>

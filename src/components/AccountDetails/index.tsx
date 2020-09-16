@@ -12,11 +12,7 @@ import Transaction from './Transaction'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { getEtherscanLink } from '../../utils'
-import { injected, walletconnect, walletlink, fortmatic, portis } from '../../connectors'
-import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
-import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
-import FortmaticIcon from '../../assets/images/fortmaticIcon.png'
-import PortisIcon from '../../assets/images/portisIcon.png'
+import { injected } from '../../connectors'
 import Identicon from '../Identicon'
 import { ButtonSecondary } from '../Button'
 import { ExternalLink as LinkIcon } from 'react-feather'
@@ -196,10 +192,6 @@ const WalletAction = styled(ButtonSecondary)`
   }
 `
 
-const MainWalletAction = styled(WalletAction)`
-  color: ${({ theme }) => theme.primary1};
-`
-
 function renderTransactions(transactions) {
   return (
     <TransactionListWrapper>
@@ -232,10 +224,11 @@ export default function AccountDetails({
   function formatConnectorName() {
     const { ethereum } = window
     const isMetaMask = !!(ethereum && ethereum.isMetaMask)
+    const isSparrow = !!(ethereum && ethereum.isSparrow)
     const name = Object.keys(SUPPORTED_WALLETS)
       .filter(
         k =>
-          SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
+          SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK') || isSparrow === (k === 'SPARROW'))
       )
       .map(k => SUPPORTED_WALLETS[k].name)[0]
     return <WalletName>Connected with {name}</WalletName>
@@ -247,39 +240,6 @@ export default function AccountDetails({
         <IconWrapper size={16}>
           <Identicon />
         </IconWrapper>
-      )
-    } else if (connector === walletconnect) {
-      return (
-        <IconWrapper size={16}>
-          <img src={WalletConnectIcon} alt={'wallet connect logo'} />
-        </IconWrapper>
-      )
-    } else if (connector === walletlink) {
-      return (
-        <IconWrapper size={16}>
-          <img src={CoinbaseWalletIcon} alt={'coinbase wallet logo'} />
-        </IconWrapper>
-      )
-    } else if (connector === fortmatic) {
-      return (
-        <IconWrapper size={16}>
-          <img src={FortmaticIcon} alt={'fortmatic logo'} />
-        </IconWrapper>
-      )
-    } else if (connector === portis) {
-      return (
-        <>
-          <IconWrapper size={16}>
-            <img src={PortisIcon} alt={'portis logo'} />
-            <MainWalletAction
-              onClick={() => {
-                portis.portis.showPortis()
-              }}
-            >
-              Show Portis
-            </MainWalletAction>
-          </IconWrapper>
-        </>
       )
     }
   }
@@ -305,7 +265,7 @@ export default function AccountDetails({
               <AccountGroupingRow>
                 {formatConnectorName()}
                 <div>
-                  {connector !== injected && connector !== walletlink && (
+                  {connector !== injected && (
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {
@@ -358,7 +318,7 @@ export default function AccountDetails({
                           href={getEtherscanLink(chainId, ENSName, 'address')}
                         >
                           <LinkIcon size={16} />
-                          <span style={{ marginLeft: '4px' }}>View on Etherscan</span>
+                          <span style={{ marginLeft: '4px' }}>View on Ubiqscan</span>
                         </AddressLink>
                       </div>
                     </AccountControl>
@@ -376,7 +336,7 @@ export default function AccountDetails({
                           href={getEtherscanLink(chainId, account, 'address')}
                         >
                           <LinkIcon size={16} />
-                          <span style={{ marginLeft: '4px' }}>View on Etherscan</span>
+                          <span style={{ marginLeft: '4px' }}>View on Ubiqscan</span>
                         </AddressLink>
                       </div>
                     </AccountControl>

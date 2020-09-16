@@ -13,9 +13,9 @@ import Option from './Option'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { ExternalLink } from '../../theme'
 import MetamaskIcon from '../../assets/images/metamask.png'
+import SparrowIcon from '../../assets/images/sparrow.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { injected, fortmatic, portis } from '../../connectors'
-import { OVERLAY_READY } from '../../connectors/Fortmatic'
+import { injected } from '../../connectors'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 
 const CloseIcon = styled.div`
@@ -192,25 +192,14 @@ export default function WalletModal({
     })
   }
 
-  // close wallet modal if fortmatic modal is active
-  useEffect(() => {
-    fortmatic.on(OVERLAY_READY, () => {
-      toggleWalletModal()
-    })
-  }, [toggleWalletModal])
-
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
     const isMetamask = window.ethereum && window.ethereum.isMetaMask
+    const isSparrow = window.ethereum && window.ethereum.isSparrow
     return Object.keys(SUPPORTED_WALLETS).map(key => {
       const option = SUPPORTED_WALLETS[key]
       // check for mobile options
       if (isMobile) {
-        //disable portis on mobile for now
-        if (option.connector === portis) {
-          return null
-        }
-
         if (!window.web3 && !window.ethereum && option.mobile) {
           return (
             <Option
@@ -247,6 +236,18 @@ export default function WalletModal({
                 icon={MetamaskIcon}
               />
             )
+          } else if (option.name === 'Sparrow') {
+            return (
+              <Option
+                id={`connect-${key}`}
+                key={key}
+                color={'#00ea90'}
+                header={'Install Sparrow'}
+                subheader={null}
+                link={'https://ubiqsmart.com/sparrow'}
+                icon={SparrowIcon}
+              />
+            )
           } else {
             return null //dont want to return install twice
           }
@@ -255,8 +256,16 @@ export default function WalletModal({
         else if (option.name === 'MetaMask' && !isMetamask) {
           return null
         }
+        // don't return sparrow if injected provider isn't sparrow
+        else if (option.name === 'Sparrow' && !isSparrow) {
+          return null
+        }
         // likewise for generic
         else if (option.name === 'Injected' && isMetamask) {
+          return null
+        }
+        // likewise for generic
+        else if (option.name === 'Injected' && isSparrow) {
           return null
         }
       }
@@ -286,6 +295,7 @@ export default function WalletModal({
   }
 
   function getModalContent() {
+    const isMetamask = window.ethereum && window.ethereum.isMetaMask
     if (error) {
       return (
         <UpperSection>
@@ -295,7 +305,7 @@ export default function WalletModal({
           <HeaderRow>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error connecting'}</HeaderRow>
           <ContentWrapper>
             {error instanceof UnsupportedChainIdError ? (
-              <h5>Please connect to the appropriate Ethereum network.</h5>
+              <h5>Please connect to the appropriate Ubiq network.</h5>
             ) : (
               'Error connecting. Try refreshing the page.'
             )}
@@ -346,10 +356,16 @@ export default function WalletModal({
           ) : (
             <OptionGrid>{getOptions()}</OptionGrid>
           )}
-          {walletView !== WALLET_VIEWS.PENDING && (
+          {walletView !== WALLET_VIEWS.PENDING && isMetamask && (
             <Blurb>
-              <span>New to Ethereum? &nbsp;</span>{' '}
-              <ExternalLink href="https://ethereum.org/wallets/">Learn more about wallets</ExternalLink>
+              <span>New to Ubiq? &nbsp;</span>{' '}
+              <ExternalLink href="https://blog.ubiqsmart.com/adding-ubiq-to-metamask-96ae40aa95cf">Learn how to add Ubiq to MetaMask</ExternalLink>
+            </Blurb>
+          )}
+          {walletView !== WALLET_VIEWS.PENDING && !isMetamask && (
+            <Blurb>
+              <span>New to Ubiq? &nbsp;</span>{' '}
+              <ExternalLink href="https://blog.ubiqsmart.com/adding-ubiq-to-metamask-96ae40aa95cf">Learn how to use Sparrow</ExternalLink>
             </Blurb>
           )}
         </ContentWrapper>
