@@ -1,4 +1,4 @@
-import { ChainId, Pair, Token, Currency } from '@uniswap/sdk'
+import { ChainId, Pair, Token, Currency } from 'shinobi-sdk'
 import flatMap from 'lodash.flatmap'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'

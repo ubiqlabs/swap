@@ -1,6 +1,6 @@
 import { Contract } from '@ethersproject/contracts'
-import { ChainId, WETH } from '@uniswap/sdk'
-import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json'
+import { ChainId, WETH } from 'shinobi-sdk'
+import { abi as IUniswapV2PairABI } from 'shinobi-v2-core/build/IUniswapV2Pair.json'
 import { useMemo } from 'react'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import UNISOCKS_ABI from '../constants/abis/unisocks.json'
