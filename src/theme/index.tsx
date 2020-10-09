@@ -201,6 +201,24 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+::-webkit-scrollbar
+{
+  width: 4px;  /* for vertical scrollbars */
+  height: 4px; /* for horizontal scrollbars */
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track
+{
+  background: #222;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: #00ea90;
+  border-radius: 3px;
+}
 `
 
 export const ThemedGlobalStyle = createGlobalStyle`
