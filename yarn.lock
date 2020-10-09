@@ -2555,33 +2555,10 @@
   resolved "https://registry.yarnpkg.com/@uniswap/lib/-/lib-1.1.1.tgz#0afd29601846c16e5d082866cbb24a9e0758e6bc"
   integrity sha512-2yK7sLpKIT91TiS5sewHtOa7YuM8IuBXVl4GZv2jZFys4D2sY7K5vZh6MqD25TPA95Od+0YzCVq6cTF2IKrOmg==
 
-"@uniswap/sdk@5plint3r/shinobi-sdk.git#v2":
-  version "3.0.3"
-  resolved "https://codeload.github.com/5plint3r/shinobi-sdk/tar.gz/3fa2ef68c648446ddc0bf43025df2ac4c26f3d4d"
-  dependencies:
-    "@uniswap/v2-core" "5plint3r/shinobi-v2-core.git#master"
-    big.js "^5.2.2"
-    decimal.js-light "^2.5.0"
-    jsbi "^3.1.1"
-    tiny-invariant "^1.1.0"
-    tiny-warning "^1.0.3"
-    toformat "^2.0.0"
-
 "@uniswap/token-lists@^1.0.0-beta.11":
   version "1.0.0-beta.11"
   resolved "https://registry.yarnpkg.com/@uniswap/token-lists/-/token-lists-1.0.0-beta.11.tgz#365dd55d536c67fa550554c0658391bfbc2930b7"
   integrity sha512-dGHdb58d+rN7G164ziPP6omb1R0hwBVgs95er83OzXKkVRlLKE/FLSdgpDaTxLj1war+P/hZXw2/ToYcKFsobQ==
-
-"@uniswap/v2-core@5plint3r/shinobi-v2-core.git#master":
-  version "1.0.1"
-  resolved "https://codeload.github.com/5plint3r/shinobi-v2-core/tar.gz/876f1c7f4b186fb52d9787000e6f9c6c1ecb2158"
-
-"@uniswap/v2-periphery@5plint3r/shinobi-v2-periphery.git#master":
-  version "1.1.0-beta.0"
-  resolved "https://codeload.github.com/5plint3r/shinobi-v2-periphery/tar.gz/bef3abeb3ca58ea4df542a1f8ca89e1a98037d5c"
-  dependencies:
-    "@uniswap/lib" "1.1.1"
-    "@uniswap/v2-core" "5plint3r/shinobi-v2-core.git#master"
 
 "@walletconnect/client@^1.1.1-alpha.0":
   version "1.1.1-alpha.0"
@@ -13369,6 +13346,32 @@ shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+
+shinobi-sdk@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/shinobi-sdk/-/shinobi-sdk-3.0.4.tgz#e27ef89211d0bacba1b46340feba6fcb335d4d0a"
+  integrity sha512-9+CoQxoZ9P5WjJ6JNMbe+zQOtc3ryTMqYvTxDMBwH7o61kPUS4RwXMnUMxC0loNPmKW0/kzvyHACfDrpTBbOaw==
+  dependencies:
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    shinobi-v2-core "^1.0.1"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
+
+shinobi-v2-core@1.0.1, shinobi-v2-core@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/shinobi-v2-core/-/shinobi-v2-core-1.0.1.tgz#584c020c8962e006adeebc78f2211aa2cbec5d3b"
+  integrity sha512-xQOkMekw51Z9ASTqNrNuT6OfkkmjbuBur+l1oB8YqR6vxaa71IDU6Oap8NJUFbhL3InH54E5Wdwzt8UwJaY7Fg==
+
+shinobi-v2-periphery@^1.1.1-beta.0:
+  version "1.1.1-beta.0"
+  resolved "https://registry.yarnpkg.com/shinobi-v2-periphery/-/shinobi-v2-periphery-1.1.1-beta.0.tgz#6b5de9dc2bf3301c78b47b1f398fe8470144596c"
+  integrity sha512-v1RLbeY2SvLckKCWeGs1o38AmxIj0sevJ7I1AAaAmyp4KjGnfJMDB4P0f5ciCXbzZGonDCl2eHH3XCIygqLJnA==
+  dependencies:
+    "@uniswap/lib" "1.1.1"
+    shinobi-v2-core "^1.0.1"
 
 side-channel@^1.0.2:
   version "1.0.2"
