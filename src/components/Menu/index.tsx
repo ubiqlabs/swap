@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { Info, BookOpen, Code, PieChart, MessageCircle } from 'react-feather'
+import { Info, Code, PieChart, MessageCircle } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import useToggle from '../../hooks/useToggle'
@@ -113,10 +113,6 @@ export default function Menu() {
             <Info size={14} />
             About
           </MenuItem>
-          <MenuItem id="link" href="https://uniswap.org/docs/v2">
-            <BookOpen size={14} />
-            Docs
-          </MenuItem>
           <MenuItem id="link" href={CODE_LINK}>
             <Code size={14} />
             Code
@@ -125,7 +121,7 @@ export default function Menu() {
             <MessageCircle size={14} />
             Discord
           </MenuItem>
-          <MenuItem id="link" href="https://info.ubiq.ninja">
+          <MenuItem id="link" href="https://shinobi-info.ubiq.ninja">
             <PieChart size={14} />
             Analytics
           </MenuItem>
