@@ -314,16 +314,16 @@ function Header({ history }: { history: any }) {
           >
             {t('pool')}
           </StyledNavLink>
-          <StyledNavLink id={`stake-nav-link`} to={'/uni'} isActive={() => history.location.pathname.includes('/uni')}>
+          {false && (<StyledNavLink id={`stake-nav-link`} to={'/uni'} isActive={() => history.location.pathname.includes('/uni')}>
             UNI
-          </StyledNavLink>
-          <StyledNavLink
+          </StyledNavLink>)}
+          {false && (<StyledNavLink
             id={`stake-nav-link`}
             to={'/vote'}
             isActive={() => history.location.pathname.includes('/vote')}
           >
             Vote
-          </StyledNavLink>
+          </StyledNavLink>)}
           <StyledExternalLink id={`stake-nav-link`} href={'https://shinobi-info.ubiq.ninja/'}>
             Charts <span style={{ fontSize: '11px' }}>↗</span>
           </StyledExternalLink>
