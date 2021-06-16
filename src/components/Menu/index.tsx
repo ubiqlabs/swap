@@ -121,7 +121,7 @@ export default function Menu() {
             <PieChart size={14} />
             Analytics
           </MenuItem>
-          {account && (
+          {false && account && (
             <ButtonPrimary onClick={openClaimModal} padding="8px 16px" width="100%" borderRadius="12px" mt="0.5rem">
               Claim UNI
             </ButtonPrimary>
