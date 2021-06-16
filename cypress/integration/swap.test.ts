@@ -1,5 +1,7 @@
 describe('Swap', () => {
-  beforeEach(() => cy.visit('/swap'))
+  beforeEach(() => {
+    cy.visit('/swap')
+  })
   it('can enter an amount into input', () => {
     cy.get('#swap-currency-input .token-amount-input')
       .type('0.001', { delay: 200 })
