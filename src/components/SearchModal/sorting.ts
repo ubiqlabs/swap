@@ -1,6 +1,7 @@
-import { Token, TokenAmount } from 'shinobi-sdk'
+import { Token, TokenAmount, WETH } from 'shinobi-sdk'
 import { useMemo } from 'react'
 import { useAllTokenBalances } from '../../state/wallet/hooks'
+import { useActiveWeb3React } from '../../hooks'
 
 // compare two token amounts with highest one coming first
 function balanceComparator(balanceA?: TokenAmount, balanceB?: TokenAmount) {
@@ -14,12 +15,19 @@ function balanceComparator(balanceA?: TokenAmount, balanceB?: TokenAmount) {
   return 0
 }
 
-function getTokenComparator(balances: {
-  [tokenAddress: string]: TokenAmount | undefined
+function getTokenComparator(
+  weth: Token | undefined,
+  balances: { [tokenAddress: string]: TokenAmount | undefined
 }): (tokenA: Token, tokenB: Token) => number {
   return function sortTokens(tokenA: Token, tokenB: Token): number {
     // -1 = a is first
     // 1 = b is first
+
+    // sort ETH first
+    if (weth) {
+      if (tokenA.equals(weth)) return -1
+      if (tokenB.equals(weth)) return 1
+    }
 
     // sort by balances
     const balanceA = balances[tokenA.address]
@@ -38,8 +46,10 @@ function getTokenComparator(balances: {
 }
 
 export function useTokenComparator(inverted: boolean): (tokenA: Token, tokenB: Token) => number {
+  const { chainId } = useActiveWeb3React()
+  const weth = WETH[chainId || 8]
   const balances = useAllTokenBalances()
-  const comparator = useMemo(() => getTokenComparator(balances ?? {}), [balances])
+  const comparator = useMemo(() => getTokenComparator(weth, balances ?? {}), [balances])
   return useMemo(() => {
     if (inverted) {
       return (tokenA: Token, tokenB: Token) => comparator(tokenA, tokenB) * -1
