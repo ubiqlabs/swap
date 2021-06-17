@@ -370,7 +370,7 @@ export default function WalletModal({
           {walletView !== WALLET_VIEWS.PENDING && !isMetamask && (
             <Blurb>
               <span>New to Ubiq? &nbsp;</span>{' '}
-              <ExternalLink href="https://blog.ubiqsmart.com/adding-ubiq-to-metamask-96ae40aa95cf">Learn how to use Sparrow</ExternalLink>
+              <ExternalLink href="https://ubiq.ninja/en/wallets/sparrow">Learn how to use Sparrow</ExternalLink>
             </Blurb>
           )}
         </ContentWrapper>
