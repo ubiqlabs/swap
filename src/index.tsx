@@ -1,19 +1,21 @@
-import { Web3Provider } from '@ethersproject/providers'
 import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { NetworkContextName } from './constants'
 import 'inter-ui'
+import React, { StrictMode } from 'react'
+import ReactDOM from 'react-dom'
+import ReactGA from 'react-ga'
+import { Provider } from 'react-redux'
+import { HashRouter } from 'react-router-dom'
+import { NetworkContextName } from './constants'
 import './i18n'
 import App from './pages/App'
 import store from './state'
 import ApplicationUpdater from './state/application/updater'
-import TransactionUpdater from './state/transactions/updater'
 import ListsUpdater from './state/lists/updater'
-import UserUpdater from './state/user/updater'
 import MulticallUpdater from './state/multicall/updater'
+import TransactionUpdater from './state/transactions/updater'
+import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
+import getLibrary from './utils/getLibrary'
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 
@@ -21,11 +23,12 @@ if ('ethereum' in window) {
   ;(window.ethereum as any).autoRefreshOnNetworkChange = false
 }
 
-function getLibrary(provider: any): Web3Provider {
-  const library = new Web3Provider(provider)
-  library.pollingInterval = 15000
-  return library
-}
+window.addEventListener('error', error => {
+  ReactGA.exception({
+    description: `${error.message} @ ${error.filename}:${error.lineno}:${error.colno}`,
+    fatal: true
+  })
+})
 
 function Updaters() {
   return (
@@ -40,21 +43,21 @@ function Updaters() {
 }
 
 ReactDOM.render(
-  <>
+  <StrictMode>
     <FixedGlobalStyle />
     <Web3ReactProvider getLibrary={getLibrary}>
       <Web3ProviderNetwork getLibrary={getLibrary}>
         <Provider store={store}>
           <Updaters />
           <ThemeProvider>
-            <>
-              <ThemedGlobalStyle />
+            <ThemedGlobalStyle />
+            <HashRouter>
               <App />
-            </>
+            </HashRouter>
           </ThemeProvider>
         </Provider>
       </Web3ProviderNetwork>
     </Web3ReactProvider>
-  </>,
+  </StrictMode>,
   document.getElementById('root')
 )

@@ -192,7 +192,7 @@ const WalletAction = styled(ButtonSecondary)`
   }
 `
 
-function renderTransactions(transactions) {
+function renderTransactions(transactions: string[]) {
   return (
     <TransactionListWrapper>
       {transactions.map((hash, i) => {
@@ -204,8 +204,8 @@ function renderTransactions(transactions) {
 
 interface AccountDetailsProps {
   toggleWalletModal: () => void
-  pendingTransactions: any[]
-  confirmedTransactions: any[]
+  pendingTransactions: string[]
+  confirmedTransactions: string[]
   ENSName?: string
   openOptions: () => void
 }
@@ -242,15 +242,12 @@ export default function AccountDetails({
         </IconWrapper>
       )
     }
+    return null
   }
 
-  const clearAllTransactionsCallback = useCallback(
-    (event: React.MouseEvent) => {
-      event.preventDefault()
-      dispatch(clearAllTransactions({ chainId }))
-    },
-    [dispatch, chainId]
-  )
+  const clearAllTransactionsCallback = useCallback(() => {
+    if (chainId) dispatch(clearAllTransactions({ chainId }))
+  }, [dispatch, chainId])
 
   return (
     <>
@@ -298,7 +295,7 @@ export default function AccountDetails({
                     <>
                       <div>
                         {getStatusIcon()}
-                        <p> {shortenAddress(account)}</p>
+                        <p> {account && shortenAddress(account)}</p>
                       </div>
                     </>
                   )}
@@ -309,17 +306,21 @@ export default function AccountDetails({
                   <>
                     <AccountControl>
                       <div>
-                        <Copy toCopy={account}>
-                          <span style={{ marginLeft: '4px' }}>Copy Address</span>
-                        </Copy>
-                        <AddressLink
-                          hasENS={!!ENSName}
-                          isENS={true}
-                          href={getEtherscanLink(chainId, ENSName, 'address')}
-                        >
-                          <LinkIcon size={16} />
-                          <span style={{ marginLeft: '4px' }}>View on Ubiqscan</span>
-                        </AddressLink>
+                        {account && (
+                          <Copy toCopy={account}>
+                            <span style={{ marginLeft: '4px' }}>Copy Address</span>
+                          </Copy>
+                        )}
+                        {chainId && account && (
+                          <AddressLink
+                            hasENS={!!ENSName}
+                            isENS={true}
+                            href={chainId && getEtherscanLink(chainId, ENSName, 'address')}
+                          >
+                            <LinkIcon size={16} />
+                            <span style={{ marginLeft: '4px' }}>View on Ubiqscan</span>
+                          </AddressLink>
+                        )}
                       </div>
                     </AccountControl>
                   </>
@@ -327,17 +328,21 @@ export default function AccountDetails({
                   <>
                     <AccountControl>
                       <div>
-                        <Copy toCopy={account}>
-                          <span style={{ marginLeft: '4px' }}>Copy Address</span>
-                        </Copy>
-                        <AddressLink
-                          hasENS={!!ENSName}
-                          isENS={false}
-                          href={getEtherscanLink(chainId, account, 'address')}
-                        >
-                          <LinkIcon size={16} />
-                          <span style={{ marginLeft: '4px' }}>View on Ubiqscan</span>
-                        </AddressLink>
+                        {account && (
+                          <Copy toCopy={account}>
+                            <span style={{ marginLeft: '4px' }}>Copy Address</span>
+                          </Copy>
+                        )}
+                        {chainId && account && (
+                          <AddressLink
+                            hasENS={!!ENSName}
+                            isENS={false}
+                            href={getEtherscanLink(chainId, account, 'address')}
+                          >
+                            <LinkIcon size={16} />
+                            <span style={{ marginLeft: '4px' }}>View on Ubiqscan</span>
+                          </AddressLink>
+                        )}
                       </div>
                     </AccountControl>
                   </>
