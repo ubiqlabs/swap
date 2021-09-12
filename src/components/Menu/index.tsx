@@ -105,7 +105,7 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://ubiq.ninja/dapps/shinobi">
+          <MenuItem id="link" href="https://ubiq.ninja/en/shinobi/about">
             <Info size={14} />
             About
           </MenuItem>
