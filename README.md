@@ -9,7 +9,7 @@ An open source interface for Shinobi -- a protocol for decentralized exchange of
 - contracts: [deployed by 5plint3r](https://github.com/5plint3r/shinobi-artifacts)
 - Docs: [uniswap.org/docs/](https://uniswap.org/docs/)
 
-## Accessing the Uniswap Interface
+## Accessing the Shinobi Interface
 
 visit [shinobi.ubiq.ninja](https://shinobi.ubiq.ninja)
 
