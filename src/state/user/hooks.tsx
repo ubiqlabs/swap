@@ -1,7 +1,7 @@
 import { ChainId, Pair, Token } from 'shinobi-sdk'
 import flatMap from 'lodash.flatmap'
 import { useCallback, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants'
 
 import { useActiveWeb3React } from '../../hooks'
@@ -41,7 +41,18 @@ function deserializeToken(serializedToken: SerializedToken): Token {
 }
 
 export function useIsDarkMode(): boolean {
-  return true
+  const { userDarkMode, matchesDarkMode } = useSelector<
+    AppState,
+    { userDarkMode: boolean | null; matchesDarkMode: boolean }
+  >(
+    ({ user: { matchesDarkMode, userDarkMode } }) => ({
+      userDarkMode,
+      matchesDarkMode
+    }),
+    shallowEqual
+  )
+
+  return userDarkMode === null ? matchesDarkMode : userDarkMode
 }
 
 export function useDarkModeManager(): [boolean, () => void] {
