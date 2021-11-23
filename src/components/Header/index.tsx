@@ -327,6 +327,9 @@ function Header({ history }: { history: any }) {
           <StyledExternalLink id={`stake-nav-link`} href={'https://shinobi-info.ubiq.ninja/'}>
             Charts <span style={{ fontSize: '11px' }}>↗</span>
           </StyledExternalLink>
+          <StyledExternalLink id={`stake-nav-link`} href={'https://bridge.ubiq.fi/'}>
+            Bridge <span style={{ fontSize: '11px' }}>↗</span>
+          </StyledExternalLink>
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>
