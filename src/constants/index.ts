@@ -16,9 +16,9 @@ type ChainTokenList = {
 export const ESCH = new Token(ChainId.UBIQ, '0xcf3222b7FDa7a7563b9E1E6C966Bead04AC23c36', 18, 'ESCH', 'Escher')
 export const GEO = new Token(ChainId.UBIQ, '0x500684CE0D4f04aBeDff3e54fCF8acC5E6CFc4bD', 8, 'GEO', 'GeoCoin')
 export const SPHR = new Token(ChainId.UBIQ, '0x20e3dD746DdF519B23Ffbbb6Da7a5d33eA6349D6', 8, 'SPHR', 'Sphere')
-export const CAULI = new Token(ChainId.UBIQ, '0x0319b92eb57929684C27531Da133b0d2BbF691Af', 8, 'CAULI', 'Cauli')
-export const RICKS = new Token(ChainId.UBIQ, '0x5e1715bB79805Bd672729760B3f7F34D6f485098', 8, 'RICKS', 'PickleRicks')
-export const APX = new Token(ChainId.UBIQ, '0xD245207cFbF6eb6F34970Db2a807AB1D178fDE6C', 8, 'APX', 'APX')
+export const PDAI = new Token(ChainId.UBIQ, '0xa8b56D3DDaDEe0E9B9E0bB21b7Bd58c120A8e6cd', 18, 'pDAI', 'Polygon DAI')
+export const PUSDC = new Token(ChainId.UBIQ, '0xA30f18BB70B67B1CA59ecfd3e816296ebD4F6bfC', 18, 'pUSDC', 'Polygon USDC')
+export const INK = new Token(ChainId.UBIQ, '0x7845fcbe28ac19ab7ec1c1d9674e34fdcb4917db', 18, 'INK', 'INK')
 
 export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
@@ -77,16 +77,16 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
-  [ChainId.UBIQ]: [ESCH, GEO, RICKS]
+  [ChainId.UBIQ]: [ESCH, INK, PDAI, PUSDC, GEO]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
-  [ChainId.UBIQ]: [...WETH_ONLY[ChainId.UBIQ], ESCH, GEO, SPHR, CAULI, RICKS,]
+  [ChainId.UBIQ]: [...WETH_ONLY[ChainId.UBIQ], ESCH, INK, PDAI, PUSDC, GEO,]
 }
-
+// update these
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
   [ChainId.MAINNET]: [
     [
