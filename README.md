@@ -5,13 +5,13 @@
 
 An open source interface for Shinobi -- a protocol for decentralized exchange of Ubiq tokens.
 
-- Interface: [shinobi.ubiq.ninja](https://shinobi.ubiq.ninja)
+- Interface: [swap.ubiq.fi](https://swap.ubiq.fi)
 - contracts: [deployed by 5plint3r](https://github.com/5plint3r/shinobi-artifacts)
 - Docs: [uniswap.org/docs/](https://uniswap.org/docs/)
 
-## Accessing the Shinobi Interface
+## Accessing the UbiqSwap Interface
 
-visit [shinobi.ubiq.ninja](https://shinobi.ubiq.ninja)
+visit [swap.ubiq.fi](https://swap.ubiq.fi)
 
 ## Listing a token
 
