@@ -294,11 +294,11 @@ function Header({ history }: { history: any }) {
         <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
       </Modal>
       <HeaderRow>
-        <Title href="." style={{}}>
+        {false && (<Title href="." style={{}}>
           <UniIcon>
             <img width={'24px'} src={isDark ? LogoDark : Logo} alt="logo" />
           </UniIcon>
-        </Title>
+        </Title>)}
         <HeaderLinks>
           <StyledNavLink id={`swap-nav-link`} to={'/swap'} isActive={() => history.location.pathname.includes('/swap')}>
             {t('swap')}
