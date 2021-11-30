@@ -117,7 +117,7 @@ export default function Menu() {
             <MessageCircle size={14} />
             Discord
           </MenuItem>
-          <MenuItem id="link" href="https://shinobi-info.ubiq.ninja">
+          <MenuItem id="link" href="https://info.swap.ubiq.fi">
             <PieChart size={14} />
             Analytics
           </MenuItem>

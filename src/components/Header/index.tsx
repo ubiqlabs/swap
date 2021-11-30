@@ -324,7 +324,7 @@ function Header({ history }: { history: any }) {
           >
             Vote
           </StyledNavLink>)}
-          <StyledExternalLink id={`stake-nav-link`} href={'https://shinobi-info.ubiq.ninja/'}>
+          <StyledExternalLink id={`stake-nav-link`} href={'https://info.swap.ubiq.fi/'}>
             Charts <span style={{ fontSize: '11px' }}>↗</span>
           </StyledExternalLink>
           {false && (<StyledExternalLink id={`stake-nav-link`} href={'https://bridge.ubiq.fi/'}>

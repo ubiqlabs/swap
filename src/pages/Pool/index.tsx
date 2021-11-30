@@ -174,7 +174,7 @@ export default function Pool() {
               <>
                 <ButtonSecondary>
                   <RowBetween>
-                    <ExternalLink href={'https://shinobi-info.ubiq.ninja/account/' + account}>
+                    <ExternalLink href={'https://info.swap.ubiq.fi/#/account/' + account}>
                       Account analytics and accrued fees
                     </ExternalLink>
                     <span> ↗</span>
