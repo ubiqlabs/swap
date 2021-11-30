@@ -85,7 +85,7 @@ const MenuItem = styled(ExternalLink)`
   }
 `
 
-const CODE_LINK = 'https://github.com/octanolabs/shinobi-interface'
+const CODE_LINK = 'https://github.com/ubiqlabs/swap'
 
 export default function Menu() {
   const { account } = useActiveWeb3React()

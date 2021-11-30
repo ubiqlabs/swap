@@ -16,7 +16,7 @@ visit [swap.ubiq.fi](https://swap.ubiq.fi)
 ## Listing a token
 
 Please see the
-[@octanolabs/default-token-list](https://github.com/octanolabs/default-token-list) 
+[@ubiqlabs/default-token-list](https://github.com/ubiqlabs/default-token-list) 
 repository.
 
 ## Development
