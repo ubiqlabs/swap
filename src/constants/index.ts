@@ -16,8 +16,7 @@ type ChainTokenList = {
 export const ESCH = new Token(ChainId.UBIQ, '0xcf3222b7FDa7a7563b9E1E6C966Bead04AC23c36', 18, 'ESCH', 'Escher')
 export const GEO = new Token(ChainId.UBIQ, '0x500684CE0D4f04aBeDff3e54fCF8acC5E6CFc4bD', 8, 'GEO', 'GeoCoin')
 export const SPHR = new Token(ChainId.UBIQ, '0x20e3dD746DdF519B23Ffbbb6Da7a5d33eA6349D6', 8, 'SPHR', 'Sphere')
-export const PDAI = new Token(ChainId.UBIQ, '0xa8b56D3DDaDEe0E9B9E0bB21b7Bd58c120A8e6cd', 18, 'pDAI', 'Polygon DAI')
-export const PUSDC = new Token(ChainId.UBIQ, '0xA30f18BB70B67B1CA59ecfd3e816296ebD4F6bfC', 18, 'pUSDC', 'Polygon USDC')
+export const wETH = new Token(ChainId.UBIQ, '0xa8cf68b59a616c260dd88fd1ea61fbb864f7e485', 18, 'wETH', 'Wrapped Ether')
 export const INK = new Token(ChainId.UBIQ, '0x7845fcbe28ac19ab7ec1c1d9674e34fdcb4917db', 18, 'INK', 'INK')
 
 export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
@@ -77,14 +76,14 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
-  [ChainId.UBIQ]: [ESCH, INK, PDAI, PUSDC, GEO]
+  [ChainId.UBIQ]: [ESCH, INK, wETH, GEO]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
-  [ChainId.UBIQ]: [...WETH_ONLY[ChainId.UBIQ], ESCH, INK, PDAI, PUSDC, GEO,]
+  [ChainId.UBIQ]: [...WETH_ONLY[ChainId.UBIQ], ESCH, INK, wETH, GEO,]
 }
 // update these
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {

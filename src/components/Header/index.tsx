@@ -327,9 +327,9 @@ function Header({ history }: { history: any }) {
           <StyledExternalLink id={`stake-nav-link`} href={'https://info.swap.ubiq.fi/'}>
             Charts <span style={{ fontSize: '11px' }}>↗</span>
           </StyledExternalLink>
-          {false && (<StyledExternalLink id={`stake-nav-link`} href={'https://bridge.ubiq.fi/'}>
+          <StyledExternalLink id={`stake-nav-link`} href={'https://bridge.ubiq.fi/'}>
             Bridge <span style={{ fontSize: '11px' }}>↗</span>
-          </StyledExternalLink>)}
+          </StyledExternalLink>
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>
