@@ -105,7 +105,7 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          {false && (<MenuItem id="link" href="https://ubiq.ninja/en/shinobi/about">
+          {false && (<MenuItem id="link" href="https://ubiqlabs.io/ecosystem#swap">
             <Info size={14} />
             About
           </MenuItem>)}
@@ -113,7 +113,7 @@ export default function Menu() {
             <Code size={14} />
             Code
           </MenuItem>
-          <MenuItem id="link" href="https://discord.gg/xBcyGFW3UE">
+          <MenuItem id="link" href="https://chat.ubiq.fi">
             <MessageCircle size={14} />
             Discord
           </MenuItem>
